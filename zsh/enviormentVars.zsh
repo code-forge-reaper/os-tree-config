@@ -19,6 +19,7 @@ export PATH="/opt/android-sdk/platform-tools:$PATH"
 # Bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+typeset -U PATH
 
 # hist
 HISTSIZE=1000000

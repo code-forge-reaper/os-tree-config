@@ -1,5 +1,6 @@
 # rt-plug.zsh
 # Custom Zsh plugin manager
+## @maintainer: cross-sniper|code-forge-reaper
 
 # --- Configuration ---
 # Base directory for all rt-plug related files (plugins, completions, database)
@@ -320,6 +321,9 @@ rt() {
         list)
             _rt_list
             ;;
+        initDb)
+        	_rt_init_db
+        	;;
         sync)
             _rt_sync
             ;;
@@ -338,6 +342,7 @@ rt() {
             echo "  list                       List all installed plugins and completions."
             echo "  sync                       Update all installed plugins and completions using 'git pull --ff-only'."
             echo "  help                       Show this help message."
+            echo "  initDb                     initialize the database and folders manualy(good when you rm -rf the directories and .db file)."
             echo ""
             echo "Configuration:"
             echo "  RT_HOME: Base directory for rt-plug data (default: ~/.config/zsh/rt-plug)"
