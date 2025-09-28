@@ -1,0 +1,195 @@
+#+title: Emacs Configuration
+#+author: cross-sniper
+
+This is my Emacs configuration, written in org-mode for better documentation.
+
+* Remove Title/Top Bar
+  This removes the title/top bar from Emacs.
+
+#+begin_src emacs-lisp
+(menu-bar-mode -1)
+(tool-bar-mode -1)  ; Disable the tool bar
+(scroll-bar-mode -1)  ; Disable the scroll bar
+#+end_src
+
+** Remove the GNU Emacs start screen
+#+begin_src emacs-lisp
+(setq inhibit-startup-screen t)
+#+end_src
+
+* Packages
+  The following sets up the package manager.
+
+#+begin_src emacs-lisp
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+#+end_src
+
+  The packages we want to install:
+
+#+begin_src emacs-lisp
+(straight-use-package 'emacs-everywhere)
+(straight-use-package 'evil)
+(straight-use-package 'monokai-theme)
+(straight-use-package 'ibuffer)
+(straight-use-package 'doom-modeline)
+#+end_src
+
+  The final step to actually using the packages:
+
+#+begin_src emacs-lisp
+(require 'evil)
+(evil-mode 1)
+(global-set-key (kbd "C-x C-b") 'ibuffer) ; Better buffer management
+(doom-modeline-mode 1)
+#+end_src
+
+* Color Scheme/Themes, Font and tab Size
+  This sets the color scheme to Monokai.
+
+#+begin_src emacs-lisp
+(load-theme 'monokai t)
+#+end_src
+
+  This sets the font to JetBrainsMono Nerd Font and sets the font size to 18.
+
+#+begin_src emacs-lisp
+;; Set the default font
+(set-frame-font "JetBrainsMono Nerd Font-18")
+#+end_src
+  Change tab size
+
+#+begin_src emacs-lisp
+(setq-default tab-width 4)
+#+end_src
+
+* Swap file
+  This removes the anoying #<filename>#
+#+begin_src emacs-lisp
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq create-lockfiles nil)
+#+end_src
+
+* LSP (Language Server Protocol) Setup
+  This section sets up LSP support in Emacs.
+
+#+begin_src emacs-lisp
+(straight-use-package 'lsp-mode)
+(straight-use-package 'vertico)
+(straight-use-package 'company)
+(straight-use-package 'lsp-ui) ; Optional, for UI enhancements
+(straight-use-package 'which-key) ; Optional, for better keybinding hints
+#+end_src
+
+** LSP Mode Configuration
+
+#+begin_src emacs-lisp
+(require 'lsp-mode)
+(add-hook 'prog-mode-hook #'lsp) ; Enable lsp-mode in programming modes
+
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode) ; Enable lsp-ui-mode
+
+(require 'company)
+(add-hook 'prog-mode-hook 'company-mode) ; Enable company-mode in programming modes
+
+;; Disable auto-formatting in LSP (clangd)
+(setq lsp-enable-on-type-formatting nil)
+(setq lsp-enable-indentation nil) ;; prevents LSP from messing with your tabs/spacing
+
+(setq lsp-completion-provider :capf)
+
+(require 'which-key)
+(which-key-mode) ; Enable which-key mode
+
+(require 'vertico)
+(vertico-mode 1)
+#+end_src
+
+** Additional LSP Settings
+
+#+begin_src emacs-lisp
+(setq lsp-prefer-flymake nil) ; Use lsp-ui and flycheck instead of flymake
+(setq lsp-enable-symbol-highlighting t)
+(setq lsp-ui-doc-enable t)
+#+end_src
+
+** C++ LSP Configuration
+
+  Add specific configurations for C++ using `clangd`.
+
+#+begin_src emacs-lisp
+(require 'lsp-mode)
+(require 'cc-mode)
+
+(add-hook 'c++-mode-hook #'lsp)
+(add-hook 'c-mode-hook #'lsp)
+
+(setq lsp-clients-clangd-args '("--header-insertion=never" "--clang-tidy"))
+
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(c++-mode . "cpp"))
+  (add-to-list 'lsp-language-id-configuration '(c-mode . "c")))
+
+#+end_src
+
+** Line Numbers
+
+  This enables line numbers.
+
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode t)
+#+end_src
+
+  Select one (add ":tangle no" if you don't like relative line numbering).
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Modes
+
+  This enables things like:
+  - syntax highlighting
+  - better LSP support
+
+#+begin_src emacs-lisp
+(straight-use-package 'lua-mode)
+(straight-use-package 'typescript-mode)
+#+end_src
+
+** Load Modes from Directory
+
+  This loads all `.el` files from the `~/.config/emacs/modes/` directory.
+
+#+begin_src emacs-lisp
+(defun load-directory-modes (dir)
+  "Load all Emacs Lisp files from the specified directory."
+  (let ((load-it (lambda (f)
+                   (load-file (concat (file-name-as-directory dir) f)))))
+    (mapc load-it (directory-files dir nil "\\.el$"))))
+
+(load-directory-modes (expand-file-name "~/.config/emacs/modes/"))
+#+end_src
+
+
+* Loading This Configuration
+
+
+#+begin_src emacs-lisp  :tangle no
+(org-babel-load-file (expand-file-name "~/.config/emacs/org/init.org"))
+#+end_src

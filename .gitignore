@@ -1,0 +1,7 @@
+emacs/org/*.el
+emacs/straight/
+emacs/auto-save-list/
+emacs/eln-cache/
+emacs/.cache/
+emacs/.lsp-session-v1
+nvim/lazy-lock.json
