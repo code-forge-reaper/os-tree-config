@@ -53,14 +53,16 @@ tiling_drag modifier titlebar
 # bindsym $mod+Return exec --no-startup-id sh -c 'command -v kitty && kitty || notify-send "Kitty not found!"'
 
 # Launch st if available, otherwise send a notification
-bindsym $mod+Return exec --no-startup-id sh -c 'command -v st && st || notify-send "st not found!"'
+# bindsym $mod+Return exec --no-startup-id sh -c 'command -v st && st || notify-send "st not found!"'
+bindsym $mod+Return exec --no-startup-id sh -c 'command -v cool-retro-term && cool-retro-term || notify-send "cool-retro-term not found!"'
 
 # Launch WezTerm if available, otherwise send a notification
 bindsym $mod+Shift+Return exec --no-startup-id sh -c 'command -v wezterm && wezterm || notify-send "WezTerm not found!"'
 
-# Launch Alacritty if available, otherwise send a notification
-bindsym $mod+Control+Return exec --no-startup-id sh -c 'command -v alacritty && alacritty || notify-send "Alacritty not found!"'
-
+# Launch xfce4-terminal if available, otherwise send a notification
+#bindsym $mod+Control+Return exec --no-startup-id sh -c 'command -v xfce4-terminal && xfce4-terminal || notify-send "xfce4-terminal not found!"'
+bindsym $mod+Control+Return exec --no-startup-id sh -c 'command -v xfce4-terminal && xfce4-terminal || notify-send "xfce4-terminal not found!"'
+bindsym $mod+b exec --no-startup-id sh -c 'command -v boomer && boomer || notify-send "boomer not found!"'
 # Launch foot(terminal) if available, otherwise send a notification
 # WARNING: this is wayland only
 # bindsym $mod+Control+Return exec --no-startup-id sh -c 'command -v foot && foot || notify-send "foot not found!"'
@@ -222,7 +224,7 @@ exec --no-startup-id dunst
 exec --no-startup-id mpd
 
 # the terminal
-exec --no-startup-id alacritty
+exec --no-startup-id xfce4-terminal
 exec --no-startup-id xfce4-power-manager
 
 # emacs in background server mode

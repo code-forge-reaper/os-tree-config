@@ -33,3 +33,15 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+-- TODO: run this automaticaly when there's a update: vim.api.nvim_create_autocmd("VimEnter",{callback=function()require"lazy".update()end})
+
+-- Auto update only if updates are detected
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyCheck",
+  callback = function()
+    local has_updates = require("lazy.status").has_updates()
+    if has_updates then
+      require("lazy").update({ show = true }) -- show=false if you want silent
+    end
+  end,
+})
