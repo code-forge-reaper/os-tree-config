@@ -1,3 +1,3 @@
 #!/bin/sh
-export SUDO_ASKPASS=$HOME/scripts/sudo-askpass.sh
+export SUDO_ASKPASS=$HOME/scripts/sudo-askpass.py
 /usr/bin/sudo -A "$@"
