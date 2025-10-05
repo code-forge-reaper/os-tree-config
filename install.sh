@@ -37,6 +37,7 @@ link "$DIR/zsh" "$HOME/.config/zsh"
 link "$DIR/emacs" "$HOME/.config/emacs"
 link "$DIR/scripts" "$HOME/scripts"
 link "$DIR/fish" "$HOME/.config/fish"
+link "$DIR/awesome" "$HOME/.config/awesome"
 
 link "$DIR/.zshrc" "$HOME/.zshrc"
 

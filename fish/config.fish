@@ -29,11 +29,10 @@ set -x LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$HOME/.libs/libs"
 set -x HOMEBREW_AUTO_UPDATE_SECS 500
 set -x HOMEBREW_NO_INSTALL_CLEANUP 1
 set -x FONTCONFIG_PATH /etc/fonts
-set -x HISTFILE "~/.fish_hist"
 set -x TERM alacritty
-set -x MYVIMRC "~/.vimrc"
-set -x MYNVIMRC "~/.config/nvim/init.lua"
-set -x TWEEGO_PATH "~/.storyformats"
+set -x MYVIMRC $HOME/.vimrc
+set -x MYNVIMRC $HOME/.config/nvim/init.lua
+set -x TWEEGO_PATH $HOME/.storyformats
 set -x RUSTC_WRAPPER sccache
 # set -x MANPAGER bat
 set -x MANPAGER "nvim +Man!"
@@ -58,7 +57,6 @@ function original
     if test (count $argv) -eq 0
         echo "original:"
         echo "runs the original command, be it in /usr/bin /bin or in some other folder,"
-        echo "should work with commands defined by zsh and/or bash"
         echo "Usage: original <command> [arguments]"
         return 1
     end
@@ -88,8 +86,19 @@ function findEdit
     end
 end
 
-function initD
-    source ~/dlang/dmd-2.109.1/activate.fish
+function yt
+    if test (count $argv) -eq 0
+        echo "Usage: yt <url(s)>"
+        return 1
+    end
+
+    for url in $argv
+        if string match -q "*playlist?list=*" $url
+            yt-dlp -o "$HOME/Music/%(uploader)s/%(playlist_title)s/%(title)s [%(id)s].%(ext)s" $url
+        else
+            yt-dlp -o "$HOME/Music/%(uploader)s/%(title)s [%(id)s].%(ext)s" $url
+        end
+    end
 end
 
 # aliases
@@ -112,11 +121,13 @@ alias gas="git add .; git status --short"
 alias emacscli="emacsclient"
 alias ncm="ncmpcpp"
 alias tree="tree -C"
+#alias yt='yt-dlp -o "$HOME/Music/%(uploader)s/%(playlist_title/|)s%(title)s [%(id)s].%(ext)s"'
 
 # dynamic initialization
 fzf --fish | source
 zoxide init --cmd cd fish | source
-source (/usr/bin/starship init fish --print-full-init | psub)
+#source (/usr/bin/starship init fish --print-full-init | psub)
+starship init fish | source
 
 # bun
 set -x BUN_INSTALL $HOME/.bun
