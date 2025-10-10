@@ -1,5 +1,4 @@
 local apps = {
-	"nm-applet",
 	"nitrogen --restore",
 	"picom",
 	"dunst",

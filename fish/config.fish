@@ -40,13 +40,15 @@ set -x MANPAGER "nvim +Man!"
 set -x ODIN_ROOT $HOME/git/odin
 
 # paths
-set -x PATH $HOME/.rbenv/shims $PATH
-set -x PATH $PATH $HOME/bin $HOME/.config/emacs/bin $HOME/.local/share/gem/ruby/*/bin
+set -x PATH $HOME/bin $HOME/.rbenv/shims $PATH
+set -x PATH $PATH $HOME/.config/emacs/bin $HOME/.local/share/gem/ruby/*/bin
 set -x PATH /opt/brew/opt/pod2man/bin $PATH
 set -x PATH /opt/brew/bin $PATH
 set -x PATH $PATH ~/.local/bin/
 set -x PATH $PATH /opt/android-sdk/platform-tools/
 set -x PATH $HOME/scripts $PATH
+
+eval (uni-path.py)
 
 # functions
 function kitty-reload

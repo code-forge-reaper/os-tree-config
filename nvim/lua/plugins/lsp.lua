@@ -3,6 +3,7 @@ local servers = {
   "pyright",
   "ts_ls",
   "clangd",
+  "ols"
 }
 
 local configs = {
@@ -15,6 +16,11 @@ local configs = {
       },
     },
   },
+  ols = {
+    cmd = {
+      "~/git/ols/ols"
+    },
+  }
 }
 
 return {

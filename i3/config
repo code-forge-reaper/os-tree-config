@@ -54,10 +54,10 @@ tiling_drag modifier titlebar
 
 # Launch st if available, otherwise send a notification
 # bindsym $mod+Return exec --no-startup-id sh -c 'command -v st && st || notify-send "st not found!"'
-bindsym $mod+Return exec --no-startup-id sh -c 'command -v cool-retro-term && cool-retro-term || notify-send "cool-retro-term not found!"'
+bindsym $mod+Return exec --no-startup-id sh -c 'command -v alacritty && alacritty || notify-send "alacritty not found!"'
 
-# Launch WezTerm if available, otherwise send a notification
-bindsym $mod+Shift+Return exec --no-startup-id sh -c 'command -v wezterm && wezterm || notify-send "WezTerm not found!"'
+# Launch kitty if available, otherwise send a notification
+bindsym $mod+Shift+Return exec --no-startup-id sh -c 'command -v kitty && kitty || notify-send "kitty not found!"'
 
 # Launch xfce4-terminal if available, otherwise send a notification
 #bindsym $mod+Control+Return exec --no-startup-id sh -c 'command -v xfce4-terminal && xfce4-terminal || notify-send "xfce4-terminal not found!"'
