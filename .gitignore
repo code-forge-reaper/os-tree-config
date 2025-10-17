@@ -1,4 +1,5 @@
 emacs/org/*.el
+emacs/elpaca/
 emacs/straight/
 emacs/auto-save-list/
 emacs/eln-cache/
