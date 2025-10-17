@@ -247,13 +247,13 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx( -1)
         end,
         {description = "focus next by index", group = "client"}
     ),
     awful.key({ modkey,           }, "k",
         function ()
-            awful.client.focus.byidx(-1)
+            awful.client.focus.byidx( 1)
         end,
         {description = "focus previous by index", group = "client"}
     ),
@@ -333,7 +333,24 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    -- volume
+    awful.key(
+        { }, "XF86AudioLowerVolume",
+        function() 
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+        end,
+        {description = "lower volume", group = "system"}),
+    awful.key(
+        { }, "XF86AudioRaiseVolume",
+        function()
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+        end,
+        {description = "increase volume", group = "system"}),
+    awful.key(
+        {}, "XF86AudioMute", function()
+            awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        end, {description="mute audio", group="system"})
 )
 
 clientkeys = gears.table.join(

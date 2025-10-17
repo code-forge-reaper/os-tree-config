@@ -3,7 +3,8 @@ local servers = {
   "pyright",
   "ts_ls",
   "clangd",
-  "ols"
+  "ols",
+  "gdscript"
 }
 
 local configs = {
@@ -20,7 +21,10 @@ local configs = {
     cmd = {
       "~/git/ols/ols"
     },
-  }
+  },
+	gdscript = {
+	  cmd = { "godot", "--headless", "--lsp" },
+	}
 }
 
 return {
