@@ -12,10 +12,10 @@ for pp in p:
 def run(*t):
 	print(*t)
 
-shell = os.getenv("SHELL")
-if shell == "/usr/bin/fish":
+shell = sys.argv[1]
+if shell == "fish":
 	run("set", "-x","PATH" , " ".join(f))
-elif "bash" in shell or "zsh" in shell:
+elif shell == "zsh" or shell == "bash":
     run("export", "PATH=" + ":".join(f))
 else:
 	assert False, f"TODO: support this shell {shell}"

@@ -38,7 +38,9 @@ link "$DIR/emacs" "$HOME/.config/emacs"
 link "$DIR/scripts" "$HOME/scripts"
 link "$DIR/fish" "$HOME/.config/fish"
 link "$DIR/awesome" "$HOME/.config/awesome"
+link "$DIR/puppet" "$HOME/scripts/puppet"
 
 link "$DIR/.zshrc" "$HOME/.zshrc"
+link "$DIR/starship.toml" "$HOME/.config/starship.toml"
 
 link "$DIR/.touchpad.conf" "/etc/X11/xorg.conf.d/300-touchpad.conf"

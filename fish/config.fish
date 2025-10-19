@@ -48,7 +48,7 @@ set -x PATH $PATH ~/.local/bin/
 set -x PATH $PATH /opt/android-sdk/platform-tools/
 set -x PATH $HOME/scripts $PATH
 
-eval (uni-path.py)
+eval (uni-path.py fish)
 
 # functions
 function kitty-reload

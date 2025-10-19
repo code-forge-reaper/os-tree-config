@@ -204,8 +204,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # dock
-#exec --no-startup-id tint2
-exec --no-startup-id xfce4-panel
+exec --no-startup-id tint2
+#exec --no-startup-id xfce4-panel
 
 # bluetooth dock applet
 exec --no-startup-id blueman-applet
@@ -226,7 +226,10 @@ exec --no-startup-id dunst
 exec --no-startup-id mpd
 
 # the terminal
-exec --no-startup-id xfce4-terminal
+exec --no-startup-id alacritty
+exec --no-startup-id cbatticon
+exec --no-startup-id volumeicon
+
 exec --no-startup-id xfce4-power-manager
 
 # emacs in background server mode

@@ -1,0 +1,7 @@
+PATH="$HOME/bin:$HOME/.rbenv/shims:$PATH"
+PATH="$PATH:$HOME/.config/emacs/bin:$HOME/.local/share/gem/ruby/*/bin"
+PATH="/opt/brew/opt/pod2man/bin:$PATH"
+PATH="/opt/brew/bin:$PATH"
+PATH="$PATH:~/.local/bin/"
+PATH="$PATH:/opt/android-sdk/platform-tools/"
+PATH="$HOME/scripts:$PATH"
