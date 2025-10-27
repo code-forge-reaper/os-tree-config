@@ -56,99 +56,108 @@ It uses **Elpaca** as the package manager.
 
 * Package Setup
 #+begin_src emacs-lisp
-(setq evil-want-keybinding nil)
-;; Enable Elpaca + use-package integration
-(elpaca elpaca-use-package
-  (elpaca-use-package-mode))
+  (setq evil-want-keybinding nil)
+  ;; Enable Elpaca + use-package integration
+  (elpaca elpaca-use-package
+    (elpaca-use-package-mode))
 
-;; Theme
-(use-package monokai-theme
-  :ensure t
-  :config
-  (load-theme 'monokai t))
+  ;; Theme
+  (use-package monokai-theme
+    :ensure t
+    :config
+    (load-theme 'monokai t))
 
-;; Evil (Vim bindings)
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :init
-  (evil-collection-init)
-)
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
+  ;; Evil (Vim bindings)
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :init
+    (evil-collection-init)
+  )
+  
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
 
-;; Doom modeline
-(use-package doom-modeline
-  :ensure t
-  :config
-  (doom-modeline-mode 1))
+  (setq evil-search-module 'evil-search)
 
-;; Perspective.el
-(use-package perspective
-  :ensure t
-  :bind
-  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
-  :custom
-  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
-  :init
-  (persp-mode 1))
-(electric-pair-mode 1)
+  ;; Doom modeline
+  (use-package doom-modeline
+    :ensure t
+    :config
+    (doom-modeline-mode 1))
 
-;; Git
-(use-package transient
-  :ensure t
-)
+  ;; Perspective.el
+  (use-package perspective
+    :ensure t
+    :bind
+    ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+    :custom
+    (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+    :init
+    (persp-mode 1))
+  (electric-pair-mode 1)
 
-(use-package magit
-  :ensure t)
+  ;; Git
+  (use-package transient
+    :ensure t
+  )
 
-;; LSP core + UI
-(use-package lsp-mode
-  :ensure t
-  :commands lsp
-  :hook ((c-mode c++-mode lua-mode typescript-mode) . lsp)
-  :init
-  (setq lsp-enable-on-type-formatting nil
-        lsp-enable-indentation nil
-        lsp-completion-provider :capf
-        lsp-prefer-flymake nil)
-  :config
-  (add-to-list 'lsp-language-id-configuration '(c++-mode . "cpp"))
-  (add-to-list 'lsp-language-id-configuration '(c-mode . "c")))
+  (use-package magit
+    :ensure t)
 
-(use-package lsp-ui
-  :ensure t
-  :after lsp-mode
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-doc-enable t
-        lsp-enable-symbol-highlighting t))
+  ;; LSP core + UI
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp
+    :hook ((c-mode odin-mode c++-mode lua-mode typescript-mode) . lsp)
+    :init
+    (setq lsp-enable-on-type-formatting nil
+          lsp-enable-indentation nil
+          lsp-completion-provider :capf
+          lsp-prefer-flymake nil)
+    :config
+    (add-to-list 'lsp-language-id-configuration '(c++-mode . "cpp"))
+    (add-to-list 'lsp-language-id-configuration '(c-mode . "c")))
 
-;; Company (autocomplete)
-(use-package company
-  :ensure t
-  :hook (prog-mode . company-mode))
+  (use-package lsp-ui
+    :ensure t
+    :after lsp-mode
+    :hook (lsp-mode . lsp-ui-mode)
+    :config
+    (setq lsp-ui-doc-enable t
+          lsp-enable-symbol-highlighting t))
 
-;; Which-key (helpful key popup)
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode))
+  ;; Company (autocomplete)
+  (use-package company
+    :ensure t
+    :hook (prog-mode . company-mode))
 
-;; Vertico (completion interface)
-(use-package vertico
-  :ensure t
-  :config
-  (vertico-mode 1))
+  ;; Which-key (helpful key popup)
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
 
-;; Language modes
-(use-package lua-mode
-  :ensure t)
+  ;; Vertico (completion interface)
+  (use-package vertico
+    :ensure t
+    :config
+    (vertico-mode 1))
 
-(use-package typescript-mode
-  :ensure t)
+  ;; Language modes
+  (use-package lua-mode
+    :ensure t)
+  (use-package typescript-mode
+    :ensure t)
+
+
+;; Enable odin-mode and configure OLS as the language server
+(use-package odin-mode
+  :ensure (:host github :repo "mattt-b/odin-mode")
+  :mode ("\\.odin\\'" . odin-mode))
+
 #+end_src
 
 * Misc Settings

@@ -34,6 +34,10 @@ yt() {
             yt-dlp -o "$HOME/Music/%(uploader)s/%(title)s [%(id)s].%(ext)s" "$url"
         fi
     done
+
+    if command -v mpc >/dev/null 2>&1; then
+        mpc rescan
+    fi
 }
 
 kill() {

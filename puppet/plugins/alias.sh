@@ -18,3 +18,4 @@ alias emacscli="emacsclient"
 alias ncm="ncmpcpp"
 alias tree="tree -C"
 alias grep='grep --color=auto'
+alias tm="tmux a || tmux"

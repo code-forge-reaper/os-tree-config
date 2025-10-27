@@ -3,7 +3,7 @@ local apps = {
 	"picom",
 	"dunst",
 	"mpd",
-	"alacritty",
+	terminal,
 	"xfce4-power-manager",
 	"emacs --daemon"
 }

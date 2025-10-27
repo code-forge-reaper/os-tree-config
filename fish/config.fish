@@ -129,7 +129,6 @@ alias tree="tree -C"
 fzf --fish | source
 zoxide init --cmd cd fish | source
 #source (/usr/bin/starship init fish --print-full-init | psub)
-starship init fish | source
 
 # bun
 set -x BUN_INSTALL $HOME/.bun

@@ -72,6 +72,7 @@ bindsym $mod+Control+e exec emacsclient --eval "(emacs-everywhere)"
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $mod+ctrl+k exec --no-startup-id xkill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id "rofi -modi drun,run -show drun"
@@ -235,6 +236,7 @@ exec --no-startup-id xfce4-power-manager
 # emacs in background server mode
 exec --no-startup-id /usr/bin/emacs --daemon
 exec --no-startup-id pamac-daemon
+exec --no-startup-id pnmixer
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 
